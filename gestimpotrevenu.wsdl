@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        targetNamespace="http://impotservice/"
+        xmlns:tns="http://impotservice/"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        name="ImpotService">
+    <types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"  targetNamespace="http://impotservice/">
+            <xs:element name="getImpot" type="tns:getImpot"/>
+            <xs:element name="getImpotResponse" type="tns:getImpotResponse"/>
+            <xs:complexType name="getImpot">
+                <xs:sequence>
+                    <xs:element name="arg0" type="xs:int" minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getImpotResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </types>
+    <message name="getImpot">
+        <part name="parameters" element="tns:getImpot"/>
+    </message>
+
+    <message name="getImpotResponse">
+        <part name="parameters" element="tns:getImpotResponse"/>
+    </message>
+
+    <portType name="ImpotService">
+        <operation name="getImpot">
+            <input message="tns:getImpot"/>
+            <output message="tns:getImpotResponse"/>
+        </operation>
+    </portType>
+    <binding name="ImpotServicePortBinding" type="tns:ImpotService">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+        <operation name="getImpot">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="getImpot">
+        <port name="ImpotServicePort" binding="tns:ImpotServicePortBinding">
+            <soap:address location="http://localhost:8080/impot/getImpot"/>
+        </port>
+    </service>
+</definitions>
